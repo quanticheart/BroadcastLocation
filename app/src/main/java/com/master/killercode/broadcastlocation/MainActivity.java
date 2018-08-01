@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         int permissionLocation = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
             GoogleApiLocationManager.getMyLocation(context);
+        } else if (permissionLocation == PackageManager.PERMISSION_DENIED) {
+
         }
     }
 

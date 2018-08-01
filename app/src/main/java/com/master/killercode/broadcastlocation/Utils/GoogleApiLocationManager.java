@@ -32,20 +32,6 @@ import com.master.killercode.broadcastlocation.MainActivity;
 
 public class GoogleApiLocationManager {
 
-    private Context context;
-
-    public static int REQUEST_CHECK_SETTINGS = 1001;
-    //apiCliente
-
-
-    //initVars
-    private LocationRequest locationRequest;
-    private LocationSettingsRequest.Builder builder;
-    private Task<LocationSettingsResponse> result;
-    private LocationSettingsResponse response;
-    private ResolvableApiException resolvable;
-
-
     private static GoogleApiClient googleApiClient = null;
     private static Location mylocation = null;
 
@@ -79,9 +65,7 @@ public class GoogleApiLocationManager {
                                 case LocationSettingsStatusCodes.SUCCESS:
                                     // All location settings are satisfied.
                                     // You can initialize location requests here.
-                                    int permissionLocation = ContextCompat
-                                            .checkSelfPermission(context,
-                                                    Manifest.permission.ACCESS_FINE_LOCATION);
+                                    int permissionLocation = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
                                     if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
                                         mylocation = LocationServices.FusedLocationApi
                                                 .getLastLocation(googleApiClient);
@@ -94,8 +78,7 @@ public class GoogleApiLocationManager {
                                         // Show the dialog by calling startResolutionForResult(),
                                         // and check the result in onActivityResult().
                                         // Ask to turn on GPS automatically
-                                        status.startResolutionForResult(MainActivity.activity,
-                                                10);
+                                        status.startResolutionForResult(MainActivity.activity, 10);
                                     } catch (IntentSender.SendIntentException e) {
                                         // Ignore the error.
                                     }
@@ -134,7 +117,7 @@ public class GoogleApiLocationManager {
         }
     };
 
-    public static com.google.android.gms.location.LocationListener locationListener = new com.google.android.gms.location.LocationListener() {
+    private static com.google.android.gms.location.LocationListener locationListener = new com.google.android.gms.location.LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
             mylocation = location;
